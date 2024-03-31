@@ -33,10 +33,10 @@ class UserRepository {
     }
   }
 
- Future<List< dynamic>> getUserName(String cpf) async {
+ Future<List< dynamic>> getUserName(String data) async {
     try {
 
-      var url = Uri.parse('http://192.168.56.1:8080/users/name?name=$cpf');
+      var url = Uri.parse('http://192.168.56.1:8080/users/name?name=$data');
       var response = await http.get(url).timeout(Duration(seconds: 2));
 
       if (response.statusCode == 200) {
