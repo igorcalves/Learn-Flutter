@@ -25,8 +25,7 @@ class UserForm extends StatelessWidget {
         SizedBox(height: 20),
         ElevatedButton(
           onPressed: () {
-            userBloc
-                .clearStreams(); // Limpa os streams antes de iniciar uma nova pesquisa
+            userBloc.clearStreams();
             if (cpf_or_name.isCpf(cpfController.text)) {
               userBloc.getUserByCPF(cpfController.text);
             } else {
@@ -53,22 +52,16 @@ class UserForm extends StatelessWidget {
                 ),
               );
             } else {
-              return StreamBuilder<String>(
-                key: UniqueKey(),
-                stream: userBloc.errorStream,
-                builder: (context, errorSnapshot) {
-                  if (errorSnapshot.hasData && errorSnapshot.data!.isNotEmpty) {
-                    return Center(
-                      child: Text(
-                        errorSnapshot.data!,
-                        style: TextStyle(color: Colors.red),
-                      ),
-                    );
-                  } else {
-                    return SizedBox.shrink();
-                  }
-                },
-              );
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text(
+                    snapshot.error.toString(),
+                    style: TextStyle(color: Colors.red),
+                  ),
+                );
+              } else {
+                return SizedBox.shrink();
+              }
             }
           },
         ),

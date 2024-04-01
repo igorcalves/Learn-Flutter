@@ -23,7 +23,7 @@ class UserBloc {
 
   void getUserByCPF(String cpf) async {
     var response = await _repository.getUserByCPF(cpf);
-    if (response.containsKey('error')) {
+    if (response!.containsKey('error')) {
       _errorController.sink.add(response['error']);
       _userController.sink.add(null);
     } else {
@@ -32,10 +32,19 @@ class UserBloc {
     }
   }
 
-  void getUserByName(String data) async {
-    var response = await _repository.getUserByName(data);
+ void getUserByName(String data) async {
+  try {
+    dynamic response = await _repository.getUserByName(data);
     _userListController.sink.add(User.fromJsonList(response));
+  } catch (e) {
+    String errorMessage = e.toString();
+
+    while(errorMessage.contains('Exception: ')){
+    errorMessage = errorMessage.replaceFirst('Exception: ', '');
+    }
+    _errorController.sink.add(errorMessage);
   }
+}
 
   void dispose() {
     _userController.close();

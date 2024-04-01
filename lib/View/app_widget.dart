@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:learn/domain/regras_negocio/user_bloc.dart';
 import 'package:learn/View/home_page.dart';
-import 'package:learn/repository/UserFakeRepository.dart';
-import 'package:learn/repository/fakeDb.dart';
+import 'package:learn/repository/repository.dart';
 
 class AppWidget extends StatelessWidget {
-  const AppWidget({super.key});
+  final RepositoryImplementing _repository;
+  const AppWidget(this._repository,{super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Recuperar Pessoa',
       theme: ThemeData(
         useMaterial3: true,
@@ -20,9 +21,7 @@ class AppWidget extends StatelessWidget {
         ),
       ),
       home: MyHomePage(
-        userBloc: UserBloc(FakeRepository(
-          MyRepo.getData(),
-        )),
+        userBloc: UserBloc(_repository),
       ),
     );
   }
