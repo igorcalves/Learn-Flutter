@@ -1,8 +1,7 @@
-import 'package:condominus_app_android/View/user_view/user_profile_widget.dart';
-import 'package:condominus_app_android/domain/regras_negocio/validations.dart';
-import 'package:condominus_app_android/domain/user/User.dart';
 import 'package:flutter/material.dart';
-
+import 'package:learn/View/user_view/user_profile_widget.dart';
+import 'package:learn/domain/regras_negocio/validations.dart';
+import 'package:learn/domain/user/User.dart';
 
 import '../../domain/regras_negocio/user_bloc.dart';
 
@@ -26,7 +25,8 @@ class UserForm extends StatelessWidget {
         SizedBox(height: 20),
         ElevatedButton(
           onPressed: () {
-            userBloc.clearStreams(); // Limpa os streams antes de iniciar uma nova pesquisa
+            userBloc
+                .clearStreams(); // Limpa os streams antes de iniciar uma nova pesquisa
             if (cpf_or_name.isCpf(cpfController.text)) {
               userBloc.getUserByCPF(cpfController.text);
             } else {
@@ -42,10 +42,15 @@ class UserForm extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData && snapshot.data!.isNotEmpty) {
               return Expanded(
-
-                    child: ListView(
-                      children: snapshot.data!.map((user) => UserProfileWidget(name: user!.name!, cpf: user.cpf!)).toList(),
-                    ),
+                child: ListView(
+                  children: snapshot.data!
+                      .map((user) => UserProfileWidget(
+                            name: user!.getFirstNameAndLastName(),
+                            cpf: user.cpf!,
+                            user: user,
+                          ))
+                      .toList(),
+                ),
               );
             } else {
               return StreamBuilder<String>(
@@ -72,8 +77,11 @@ class UserForm extends StatelessWidget {
           stream: userBloc.userStream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return UserProfileWidget(name: snapshot.data!.name!, cpf: snapshot.data!.cpf!);
-
+              return UserProfileWidget(
+                name: snapshot.data!.getFirstNameAndLastName(),
+                cpf: snapshot.data!.cpf!,
+                user: snapshot.data!,
+              );
             } else {
               return StreamBuilder<String>(
                 stream: userBloc.errorStream,
@@ -96,6 +104,3 @@ class UserForm extends StatelessWidget {
     );
   }
 }
-
-
-

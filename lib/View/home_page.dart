@@ -1,5 +1,5 @@
-import 'package:condominus_app_android/View/user_view/user_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:learn/View/user_view/user_ui.dart';
 import '../domain/regras_negocio/user_bloc.dart';
 
 class MyHomePage extends StatelessWidget {

@@ -1,3 +1,5 @@
+import 'package:learn/domain/regras_negocio/Rules.dart';
+
 class User {
   String? name;
   String? cpf;
@@ -29,14 +31,24 @@ class User {
     apartmentNumber = json['apartmentNumber'];
   }
 
-  static List<User> fromJsonList(List<dynamic>  jsonList) {
+  static List<User> fromJsonList(List<dynamic> jsonList) {
     return jsonList.map((json) => User.fromJson(json)).toList();
   }
 
   @override
   String toString() {
-    return 'Name: $name\nCPF: $cpf\nPhone: $phone\nRole: $role\nEmail: $email\n '
-        'BirthDay: $birthDay\nCondominiumPrice: $condominiumPrice\n '
-        'ApartmentNumber: $apartmentNumber';
+    return '$name\nCPF: $cpf\nPhone: $phone\nTipo de usuario : $role\nEmail: $email '
+        '\nData de Nascimento: ${DateFormatBR.dateFormat(birthDay!)}\nPreço do condominio: $condominiumPrice\n'
+        'numero do apartamento: $apartmentNumber';
+  }
+
+  String getFirstNameAndLastName() {
+    if (name != null) {
+      List<String> parts = name!.split(' ');
+      if (parts.isNotEmpty) {
+        return '${parts[0]} ${parts[1]}';
+      }
+    }
+    return '';
   }
 }

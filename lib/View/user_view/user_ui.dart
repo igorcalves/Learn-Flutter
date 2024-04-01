@@ -1,6 +1,6 @@
-import 'package:condominus_app_android/View/user_view/user_form.dart';
-import 'package:condominus_app_android/domain/regras_negocio/user_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:learn/domain/regras_negocio/user_bloc.dart';
+import 'package:learn/View/user_view/user_form.dart';
 
 class user_ui extends StatelessWidget {
   final UserBloc userBloc;

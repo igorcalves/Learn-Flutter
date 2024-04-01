@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:learn/repository/repository.dart';
 
-class UserRepository {
-  
+class UserRepository extends RepositoryImplementing {
+  @override
   Future<Map<String, dynamic>> getUserByCPF(String cpf) async {
     try {
-
-
-      var url = Uri.parse('http://192.168.56.1:8080/users/cpf?cpf=$cpf');
+      var url = Uri.parse(
+          'https://8080-igorcalves-condominusba-8hnd04t45m2.ws-us110.gitpod.io/users/cpf?cpf=$cpf');
       var response = await http.get(url).timeout(Duration(seconds: 2));
 
       if (response.statusCode == 200) {
@@ -33,10 +33,11 @@ class UserRepository {
     }
   }
 
- Future<List< dynamic>> getUserName(String data) async {
+  @override
+  Future<List<dynamic>> getUserByName(String cpf) async {
     try {
-
-      var url = Uri.parse('http://192.168.56.1:8080/users/name?name=$data');
+      var url = Uri.parse(
+          'https://8080-igorcalves-condominusba-8hnd04t45m2.ws-us110.gitpod.io/users/name?name=$cpf');
       var response = await http.get(url).timeout(Duration(seconds: 2));
 
       if (response.statusCode == 200) {
@@ -50,16 +51,14 @@ class UserRepository {
           // Se falhar, usa a mensagem de erro padrão
           errorMessage = 'Erro: ${response.reasonPhrase}';
         }
-       throw Exception ('Erro: $errorMessage');
+        throw Exception('Erro: $errorMessage');
       }
     } on TimeoutException catch (_) {
-      throw Exception ('Tempo limite de conexão excedido');
+      throw Exception('Tempo limite de conexão excedido');
     } on http.ClientException catch (e) {
-      throw Exception ('Erro de conexão: $e');
+      throw Exception('Erro de conexão: $e');
     } catch (e) {
-      throw Exception ('Erro inesperado: $e');
+      throw Exception('Erro inesperado: $e');
     }
   }
-
-
 }
