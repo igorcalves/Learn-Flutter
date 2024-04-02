@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:learn/domain/user/User.dart';
+import 'package:learn/domain/entities/user/User.dart';
 import 'package:learn/repository/repository.dart';
 
 class UserBloc {
@@ -32,19 +32,19 @@ class UserBloc {
     }
   }
 
- void getUserByName(String data) async {
-  try {
-    dynamic response = await _repository.getUserByName(data);
-    _userListController.sink.add(User.fromJsonList(response));
-  } catch (e) {
-    String errorMessage = e.toString();
+  void getUserByName(String data) async {
+    try {
+      dynamic response = await _repository.getUserByName(data);
+      _userListController.sink.add(User.fromJsonList(response));
+    } catch (e) {
+      String errorMessage = e.toString();
 
-    while(errorMessage.contains('Exception: ')){
-    errorMessage = errorMessage.replaceFirst('Exception: ', '');
+      while (errorMessage.contains('Exception: ')) {
+        errorMessage = errorMessage.replaceFirst('Exception: ', '');
+      }
+      _errorController.sink.add(errorMessage);
     }
-    _errorController.sink.add(errorMessage);
   }
-}
 
   void dispose() {
     _userController.close();

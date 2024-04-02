@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:learn/View/user_view/user_profile_widget.dart';
+import 'package:learn/View/blocs/user_bloc.dart';
+import 'package:learn/View/widgets/profile_widget.dart';
+import 'package:learn/domain/entities/user/User.dart';
 import 'package:learn/domain/regras_negocio/validations.dart';
-import 'package:learn/domain/user/User.dart';
 
-import '../../domain/regras_negocio/user_bloc.dart';
-
-class UserForm extends StatelessWidget {
+class ResidentPage extends StatelessWidget {
   final UserBloc userBloc;
   final TextEditingController cpfController = TextEditingController();
 
-  UserForm({
+  ResidentPage({
+    super.key,
     required this.userBloc,
   });
 

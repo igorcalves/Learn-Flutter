@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learn/domain/user/User.dart';
+import 'package:learn/domain/entities/user/User.dart';
 
 class InformationScreen extends StatelessWidget {
   final User user;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:learn/View/blocs/user_bloc.dart';
 import 'package:learn/View/user_view/user_ui.dart';
-import '../domain/regras_negocio/user_bloc.dart';
 
 class MyHomePage extends StatelessWidget {
   final UserBloc userBloc;
@@ -28,7 +28,6 @@ class MyHomePage extends StatelessWidget {
               },
               child: const Text('Buscas Usuarios'),
             ),
-  
           ],
         ),
       ),

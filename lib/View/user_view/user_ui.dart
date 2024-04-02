@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:learn/domain/regras_negocio/user_bloc.dart';
-import 'package:learn/View/user_view/user_form.dart';
+import 'package:learn/View/blocs/user_bloc.dart';
+import 'package:learn/View/pages/residents_page.dart';
 
 class user_ui extends StatelessWidget {
   final UserBloc userBloc;
 
-  const user_ui({super.key, 
+  const user_ui({
+    super.key,
     required this.userBloc,
   });
 
@@ -15,7 +16,7 @@ class user_ui extends StatelessWidget {
       appBar: AppBar(
         title: Text('Buscar Usuarios'),
       ),
-      body: UserForm(
+      body: ResidentPage(
         userBloc: userBloc,
       ),
     );

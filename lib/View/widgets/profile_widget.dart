@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:learn/View/commonViews/InformartionWidget.dart';
-import 'package:learn/domain/user/User.dart';
+import 'package:learn/View/pages/InformartionWidget.dart';
+import 'package:learn/domain/entities/user/User.dart';
 
 class UserProfileWidget extends StatelessWidget {
   final String name;
@@ -18,8 +18,7 @@ class UserProfileWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => InformationScreen(
-                user), // Substitua "InformationScreen" pelo nome da sua tela de detalhes do usuário
+            builder: (context) => InformationScreen(user),
           ),
         );
       },
